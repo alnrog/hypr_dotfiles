@@ -7,6 +7,7 @@
 get_icon() {
   case "$1" in
     kitty) echo "" ;;
+    alacritty|Alacritty) echo "" ;;
     firefox) echo "" ;;
     code|code-url-handler) echo "󰨞" ;;
     org.telegram.desktop) echo "" ;;
@@ -20,6 +21,9 @@ get_icon() {
     spotify) echo "" ;;
     steam) echo "" ;;
     gimp) echo "" ;;
+    gedit|org\.gnome\.gedit) echo "" ;;
+    pycharm|jetbrains-pycharm-ce|PyCharm) echo "󰗔" ;;
+    lm-studio|lmstudio|LM\ Studio) echo "󰳆" ;;
     libreoffice-writer|Writer) echo "" ;;
     libreoffice-calc|Calc) echo "" ;;
     libreoffice-impress|Impress) echo "" ;;
