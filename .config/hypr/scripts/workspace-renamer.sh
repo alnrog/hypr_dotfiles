@@ -6,34 +6,34 @@
 # Маппинг class -> icon
 get_icon() {
   case "$1" in
-    kitty) echo "" ;;
-    alacritty|Alacritty) echo "" ;;
+    kitty) echo "" ;;
+    alacritty|Alacritty) echo "" ;;
     firefox) echo "" ;;
     code|code-url-handler) echo "󰨞" ;;
-    Creality|CrealityPrint) echo "󰆧" ;;
-    org.telegram.desktop) echo "" ;;
+    Creality|CrealityPrint) echo "󰹛" ;;
+    org.telegram.desktop) echo "" ;;
     discord) echo "" ;;
     obsidian) echo "󱓧" ;;
     pavucontrol|org\.pulseaudio\.pavucontrol) echo "󰕾" ;;
     blueman-manager) echo "󰂯" ;;
     thunar|Thunar) echo "" ;;
     org.kde.dolphin) echo "" ;;
-    vlc|VLC) echo "󰕧" ;;
+    vlc|VLC) echo "󰕼" ;;
     spotify) echo "" ;;
     steam) echo "" ;;
     gimp) echo "" ;;
-    gedit|org\.gnome\.gedit) echo "" ;;
-    pycharm|jetbrains-pycharm-ce|PyCharm) echo "󰗔" ;;
-    lm-studio|lmstudio|LM\ Studio) echo "󰳆" ;;
-    libreoffice-writer|Writer) echo "" ;;
-    libreoffice-calc|Calc) echo "" ;;
-    libreoffice-impress|Impress) echo "" ;;
-    libreoffice-draw|Draw) echo "" ;;
-    libreoffice-base|Base) echo "" ;;
-    libreoffice-math|Math) echo "" ;;
-    libreoffice-startcenter|LibreOffice) echo "" ;;
-    VirtualBox|VirtualBox\ Manager) echo "" ;;
-    VirtualBox|VirtualBox\ Machine) echo "" ;;
+    gedit|org\.gnome\.gedit) echo "" ;;
+    pycharm|jetbrains-pycharm-ce|PyCharm) echo "" ;;
+    lm-studio|lmstudio|LM\ Studio) echo "󱙺" ;;
+    libreoffice-writer|Writer) echo "" ;;
+    libreoffice-calc|Calc) echo "" ;;
+    libreoffice-impress|Impress) echo "" ;;
+    libreoffice-draw|Draw) echo "" ;;
+    libreoffice-base|Base) echo "" ;;
+    libreoffice-math|Math) echo "" ;;
+    libreoffice-startcenter|LibreOffice) echo "" ;;
+    VirtualBox|VirtualBox\ Manager) echo "" ;;
+    VirtualBox|VirtualBox\ Machine) echo "" ;;
     *) echo "" ;;
   esac
 }
