@@ -1,7 +1,7 @@
 /* Nord Colors for Waybar - Original */
 
 * {
-  font-family: "JetBrains Mono", "Noto Sans", sans-serif;
+  font-family: "JetBrains Mono", "Noto Sans", sans-serif, "JetBrainsMono Nerd Font";
   font-size: 12px;
   color: #eceff4;
 }

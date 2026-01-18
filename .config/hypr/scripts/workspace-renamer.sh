@@ -10,6 +10,7 @@ get_icon() {
     alacritty|Alacritty) echo "" ;;
     firefox) echo "" ;;
     code|code-url-handler) echo "󰨞" ;;
+    Creality|CrealityPrint) echo "󰆧" ;;
     org.telegram.desktop) echo "" ;;
     discord) echo "" ;;
     obsidian) echo "󱓧" ;;
@@ -31,6 +32,8 @@ get_icon() {
     libreoffice-base|Base) echo "" ;;
     libreoffice-math|Math) echo "" ;;
     libreoffice-startcenter|LibreOffice) echo "" ;;
+    VirtualBox|VirtualBox\ Manager) echo "" ;;
+    VirtualBox|VirtualBox\ Machine) echo "" ;;
     *) echo "" ;;
   esac
 }
