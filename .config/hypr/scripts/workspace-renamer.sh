@@ -2,10 +2,42 @@
 
 # Event-driven workspace renamer
 # Обновляется только при изменениях (эффективнее чем polling)
+# Enhanced: теперь учитывает title окна для более точной иконки
 
-# Маппинг class -> icon
+# Маппинг class + title -> icon
+# $1 = class, $2 = title
 get_icon() {
-  case "$1" in
+  local class="$1"
+  local title="$2"
+  local t="${title,,}"  # lowercase для case-insensitiv
+
+  # Title-based overrides (приоритетнее class)
+  # Особенно полезно для VirtualBox с разными гостевыми ОС
+  if [[ "$class" == "VirtualBox Machine" || "$class" == "VirtualBox" || "$class" == "VirtualBox Manager" ]]; then
+    if [[ "$t" == *kali* ]]; then
+      echo ""; return
+    elif [[ "$t" == *debian* || "$t" == *дебиан* ]]; then
+      echo ""; return
+    elif [[ "$t" == *ubuntu* ]]; then
+      echo ""; return
+    elif [[ "$t" == *arch* ]]; then
+      echo ""; return
+    elif [[ "$t" == *fedora* ]]; then
+      echo ""; return
+    elif [[ "$t" == *mint* ]]; then
+      echo ""; return
+    elif [[ "$t" == *manjaro* ]]; then
+      echo ""; return
+    elif [[ "$t" == *gentoo* ]]; then
+      echo ""; return
+    elif [[ "$t" == *opensuse* ]]; then
+      echo ""; return
+    elif [[ "$t" == *windows* || "$t" == *win* ]]; then
+      echo "󰨡"; return
+    fi
+  fi
+
+  case "$class" in
     kitty) echo "" ;;
     alacritty|Alacritty) echo "" ;;
     firefox) echo "" ;;
@@ -34,6 +66,7 @@ get_icon() {
     libreoffice-startcenter|LibreOffice) echo "" ;;
     VirtualBox|VirtualBox\ Manager) echo "" ;;
     VirtualBox|VirtualBox\ Machine) echo "" ;;
+    xfreerdp) echo "󰢹" ;;
     *) echo "" ;;
   esac
 }
@@ -66,23 +99,26 @@ update_workspaces() {
   declare -A ws_has_windows
 
   # Обработка каждого окна
-  while IFS= read -r line; do
-    [[ -z "$line" ]] && continue
+  # Используем TSV формат чтобы избежать проблем с двоеточиями в title
+  while IFS=$'\t' read -r ws class title; do
+    [[ -z "$ws" || -z "$class" ]] && continue
     
-    local ws=$(echo "$line" | cut -d':' -f1)
-    local class=$(echo "$line" | cut -d':' -f2-)
+    local icon
+    icon=$(get_icon "$class" "$title")
     
-    if [[ -n "$ws" && -n "$class" ]]; then
-      local icon=$(get_icon "$class")
-      if [[ -z "${ws_icons[$ws]}" ]]; then
-        ws_icons[$ws]="$icon"
-      else
-        ws_icons[$ws]+=" $icon"
-      fi
-      ws_has_windows[$ws]=1
+    if [[ -z "${ws_icons[$ws]}" ]]; then
+      ws_icons[$ws]="$icon"
+    else
+      ws_icons[$ws]+=" $icon"
     fi
-  done < <(echo "$clients" | jq -r '.[] | select(.mapped == true and .class and (.class | type == "string")) | "\(.workspace.id):\(.class)"' 2>/dev/null)
-  
+    ws_has_windows[$ws]=1
+  done < <(
+    echo "$clients" | jq -r '.[]
+      | select(.mapped == true and .class and (.class | type == "string"))
+      | [(.workspace.id|tostring), .class, (.title // "")]
+      | @tsv' 2>/dev/null
+  )
+ 
   # Обновляем имена всех workspaces (1-9)
   for ws in {1..9}; do
     local name
