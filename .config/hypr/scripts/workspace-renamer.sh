@@ -40,6 +40,7 @@ get_icon() {
   case "$class" in
     kitty) echo "" ;;
     alacritty|Alacritty) echo "" ;;
+    blender|Blender) echo "" ;;
     firefox) echo "" ;;
     code|code-url-handler) echo "󰨞" ;;
     Creality|CrealityPrint) echo "󰹛" ;;
